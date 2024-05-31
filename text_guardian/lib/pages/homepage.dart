@@ -14,6 +14,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('H O M E P A G E'),
       ),
+      body: Image.asset('assets/images/homepage.png'),
     );
   }
 }
