@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:text_guardian/components/navbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('H O M E P A G E'),
       ),
+      drawer: Navbar(),
       body: Image.asset('assets/images/homepage.png'),
     );
   }
