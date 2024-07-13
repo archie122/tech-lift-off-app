@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:text_guardian/components/navbar.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:text_guardian/components/notification.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -78,30 +79,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 20),
                 TextButton(
-                  onPressed: () {},
-                  child: const Text('Actions'),
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.green),
-                    foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    padding: MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    ),
-                    shape: MaterialStatePropertyAll(
-                      StadiumBorder(),
-                    ),
-                    minimumSize: MaterialStatePropertyAll(Size.fromHeight(50)),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    elevation: MaterialStatePropertyAll(0),
-                    shadowColor: MaterialStatePropertyAll(Colors.transparent),
-                    surfaceTintColor:
-                        MaterialStatePropertyAll(Colors.transparent),
-                    visualDensity: VisualDensity.compact,
-                    animationDuration: const Duration(milliseconds: 500),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    NotificationService().showNotification(
+                        title: 'Hello', body: 'This is a notification');
+                  },
                   child: const Text('Call Family Member'),
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.green),
