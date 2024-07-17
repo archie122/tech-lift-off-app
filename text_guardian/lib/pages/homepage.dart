@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:text_guardian/components/notification.dart';
 import 'package:text_guardian/components/navbar.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:text_guardian/components/notification.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Noti.initialize(flutterLocalNotificationsPlugin);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,8 +66,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
-                  child: const Text('View Details'),
+                  onPressed: () {
+                    Noti.showTextNotification(
+                      id: 1, // Provide a unique id here
+                      title: 'Text Guardian',
+                      body:
+                          'Your text has been scanned and is ready to be viewed. Please click here to view your text.',
+                      fin: flutterLocalNotificationsPlugin,
+                    );
+                  },
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.green),
                     foregroundColor: MaterialStatePropertyAll(Colors.white),
@@ -76,12 +93,18 @@ class _HomePageState extends State<HomePage> {
                     visualDensity: VisualDensity.compact,
                     animationDuration: const Duration(milliseconds: 500),
                   ),
+                  child: const Text('View Details'),
                 ),
                 const SizedBox(height: 20),
                 TextButton(
                   onPressed: () {
-                    NotificationService().showNotification(
-                        title: 'Hello', body: 'This is a notification');
+                    Noti.showTextNotification(
+                      id: 1, // Provide a unique id here
+                      title: 'Text Guardian',
+                      body:
+                          'Your text has been scanned and is ready to be viewed. Please click here to view your text.',
+                      fin: flutterLocalNotificationsPlugin,
+                    );
                   },
                   child: const Text('Call Family Member'),
                   style: const ButtonStyle(

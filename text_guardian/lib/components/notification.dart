@@ -1,37 +1,55 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationService {
-  final FlutterLocalNotificationsPlugin notificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
-  Future<void> initNotification() async {
-    AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('flutter_logo');
-
-    var initializationSettingsIOS = DarwinInitializationSettings(
-        requestAlertPermission: true,
-        requestBadgePermission: true,
-        requestSoundPermission: true,
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) async {});
+class Noti {
+  static Future<void> initialize(
+      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+    var androidInitialize =
+        const AndroidInitializationSettings('mipmap/ic_launcher');
+    var iOSInitialize = const DarwinInitializationSettings();
 
     var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await notificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+      android: androidInitialize,
+      iOS: iOSInitialize,
+    );
+
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
-  notificationDetails() {
-    return const NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName',
-            importance: Importance.max),
-        iOS: DarwinNotificationDetails());
-  }
+  static Future<void> showTextNotification({
+    required int id,
+    required String title,
+    required String body,
+    required FlutterLocalNotificationsPlugin fin,
+  }) async {
+    var androidDetails = const AndroidNotificationDetails(
+      'channel_id',
+      'channel_name',
+      channelDescription: 'Channel for text notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      sound: RawResourceAndroidNotificationSound('notification'),
+    );
 
-  Future showNotification(
-      {int id = 0, String? title, String? body, String? payLoad}) async {
-    return notificationsPlugin.show(
-        id, title, body, await notificationDetails());
+    var iOSDetails = const DarwinNotificationDetails(
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+      sound: 'notification.wav',
+      badgeNumber: 1,
+      subtitle: 'Subtitle',
+    );
+
+    var notificationDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iOSDetails,
+    );
+
+    await fin.show(
+      id,
+      title,
+      body,
+      notificationDetails,
+    );
   }
 }
