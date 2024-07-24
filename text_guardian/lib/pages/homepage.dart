@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:text_guardian/components/notification.dart';
@@ -45,41 +47,51 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                // SizedBox(
+                //   height: 300,
+                //   child: PieChart(
+                //     PieChartData(
+                //       sections: [
+                //         PieChartSectionData(
+                //           color: Colors.red,
+                //           value: 27,
+                //           title: "25%",
+                //         ),
+                //         PieChartSectionData(
+                //           color: Colors.green,
+                //           value: 73,
+                //           title: "73%",
+                //         ),
+                //       ],
+                //       centerSpaceRadius: 80,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
-                  height: 300,
-                  child: PieChart(
-                    PieChartData(
-                      sections: [
-                        PieChartSectionData(
-                          color: Colors.red,
-                          value: 27,
-                          title: "25%",
+                  height: 100,
+                  child: TextField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      hintText: 'Enter a product name eg. pension',
+                      hintStyle: const TextStyle(fontSize: 14),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
                         ),
-                        PieChartSectionData(
-                          color: Colors.green,
-                          value: 73,
-                          title: "73%",
-                        ),
-                      ],
-                      centerSpaceRadius: 80,
+                      ),
+                      filled: true,
+                      contentPadding: EdgeInsets.all(16),
                     ),
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    Noti.showTextNotification(
-                      id: 1, // Provide a unique id here
-                      title: 'Text Guardian',
-                      body:
-                          'Your text has been scanned and is ready to be viewed. Please click here to view your text.',
-                      fin: flutterLocalNotificationsPlugin,
-                    );
-                  },
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(Colors.green),
                     foregroundColor: MaterialStatePropertyAll(Colors.white),
                     padding: MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                     ),
                     shape: MaterialStatePropertyAll(
                       StadiumBorder(),
@@ -91,41 +103,61 @@ class _HomePageState extends State<HomePage> {
                     surfaceTintColor:
                         MaterialStatePropertyAll(Colors.transparent),
                     visualDensity: VisualDensity.compact,
-                    animationDuration: const Duration(milliseconds: 500),
+                    animationDuration: Duration(milliseconds: 500),
                   ),
                   child: const Text('View Details'),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
                   onPressed: () {
                     Noti.showTextNotification(
                       id: 1, // Provide a unique id here
                       title: 'Text Guardian',
                       body:
-                          'Your text has been scanned and is ready to be viewed. Please click here to view your text.',
+                          'Your text is being analyzed and will notify you when it is ready.',
                       fin: flutterLocalNotificationsPlugin,
                     );
+
+                    Navigator.pushNamed(context, '/loading');
+
+                    Timer(const Duration(seconds: 20), () {
+                      Noti.showTextNotification(
+                        id: 1, // Provide a unique id here
+                        title: 'Text Guardian',
+                        body: 'The results are ready.',
+                        fin: flutterLocalNotificationsPlugin,
+                      );
+                    });
                   },
-                  child: const Text('Call Family Member'),
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.green),
-                    foregroundColor: MaterialStatePropertyAll(Colors.white),
-                    padding: MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                    ),
-                    shape: MaterialStatePropertyAll(
-                      StadiumBorder(),
-                    ),
-                    minimumSize: MaterialStatePropertyAll(Size.fromHeight(50)),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    elevation: MaterialStatePropertyAll(0),
-                    shadowColor: MaterialStatePropertyAll(Colors.transparent),
-                    surfaceTintColor:
-                        MaterialStatePropertyAll(Colors.transparent),
-                    visualDensity: VisualDensity.compact,
-                    animationDuration: const Duration(milliseconds: 500),
-                  ),
                 ),
+                const SizedBox(height: 20),
+                // TextButton(
+                //   onPressed: () {
+                //     Noti.showTextNotification(
+                //       id: 1, // Provide a unique id here
+                //       title: 'Text Guardian',
+                //       body:
+                //           'Your text has been scanned and is ready to be viewed. Please click here to view your text.',
+                //       fin: flutterLocalNotificationsPlugin,
+                //     );
+                //   },
+                //   child: const Text('Call Family Member'),
+                //   style: const ButtonStyle(
+                //     backgroundColor: MaterialStatePropertyAll(Colors.green),
+                //     foregroundColor: MaterialStatePropertyAll(Colors.white),
+                //     padding: MaterialStatePropertyAll(
+                //       EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                //     ),
+                //     shape: MaterialStatePropertyAll(
+                //       StadiumBorder(),
+                //     ),
+                //     minimumSize: MaterialStatePropertyAll(Size.fromHeight(50)),
+                //     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                //     elevation: MaterialStatePropertyAll(0),
+                //     shadowColor: MaterialStatePropertyAll(Colors.transparent),
+                //     surfaceTintColor:
+                //         MaterialStatePropertyAll(Colors.transparent),
+                //     visualDensity: VisualDensity.compact,
+                //     animationDuration: const Duration(milliseconds: 500),
+                //   ),
+                // ),
               ],
             ),
           ),

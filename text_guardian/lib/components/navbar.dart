@@ -33,6 +33,12 @@ class Navbar extends StatelessWidget {
               Navigator.pushNamed(context, '/login');
             },
           ),
+          ListTile(
+            title: const Text('Results'),
+            onTap: () {
+              Navigator.pushNamed(context, '/results');
+            },
+          )
         ],
       ),
     );

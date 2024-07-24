@@ -37,7 +37,6 @@ class Noti {
       presentSound: true,
       sound: 'notification.wav',
       badgeNumber: 1,
-      subtitle: 'Subtitle',
     );
 
     var notificationDetails = NotificationDetails(
