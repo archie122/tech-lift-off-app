@@ -11,14 +11,14 @@ class _LoadingState extends State<Loading> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 20), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacementNamed(context, '/results');
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
