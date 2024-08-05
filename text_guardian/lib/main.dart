@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/settings': (context) => const SettingsPage(),
         '/loading': (context) => Loading(),
-        '/results': (context) => const Results(),
+        // '/results': (context) => const Results(),
       },
     );
   }

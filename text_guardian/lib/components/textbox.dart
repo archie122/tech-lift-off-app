@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Textbox extends StatelessWidget {
+class Textbox extends StatefulWidget {
+  final TextEditingController nameController;
+  final TextEditingController messageController;
+
+  const Textbox(
+      {super.key,
+      required this.nameController,
+      required this.messageController});
+
+  @override
+  State<Textbox> createState() => _TextboxState();
+}
+
+class _TextboxState extends State<Textbox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -8,6 +21,7 @@ class Textbox extends StatelessWidget {
       child: Column(
         children: [
           TextField(
+            controller: widget.nameController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: 'Enter the name of the sender',
@@ -25,6 +39,7 @@ class Textbox extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           TextField(
+            controller: widget.messageController,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
               hintText: 'Enter the message',

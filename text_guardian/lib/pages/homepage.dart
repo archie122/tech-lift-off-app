@@ -3,8 +3,8 @@ import 'package:text_guardian/components/notification.dart';
 import 'package:text_guardian/components/navbar.dart';
 import 'package:text_guardian/components/main_button.dart';
 import 'package:text_guardian/components/textbox.dart';
-
-// import 'package:text_guardian/functions/scam_detector.dart';
+import 'package:text_guardian/functions/scam_detector.dart';
+import 'package:text_guardian/pages/results.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,10 +14,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     Noti.initialize(flutterLocalNotificationsPlugin);
+  }
+
+  void _analyzeText() {
+    final name = _nameController.text;
+    final message = _messageController.text;
+
+    final isSuspicious = ScamLinkDetector.isSuspicious(message, name);
+
+    // Debug prints
+    print('Is Suspicious: $isSuspicious');
+    print('Message: $message');
+    print('Name: $name');
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Results(isSuspicious: isSuspicious)));
   }
 
   @override
@@ -43,8 +63,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Textbox(),
-                Button(),
+                Textbox(
+                  nameController: _nameController,
+                  messageController: _messageController,
+                ),
+                Button(onPressed: _analyzeText),
                 const SizedBox(height: 20),
               ],
             ),

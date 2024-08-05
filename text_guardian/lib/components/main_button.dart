@@ -7,6 +7,10 @@ FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
 class Button extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const Button({super.key, required this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -29,16 +33,18 @@ class Button extends StatelessWidget {
       ),
       child: const Text('View Details'),
       onPressed: () {
-        Navigator.pushNamed(context, '/loading');
+        onPressed();
 
-        Timer(const Duration(seconds: 5), () {
-          Noti.showTextNotification(
-            id: 1, // Provide a unique id here
-            title: 'Text Guardian',
-            body: 'The results are ready.',
-            fin: flutterLocalNotificationsPlugin,
-          );
-        });
+        // Navigator.pushNamed(context, '/loading');
+
+        // Timer(const Duration(seconds: 5), () {
+        //   Noti.showTextNotification(
+        //     id: 1, // Provide a unique id here
+        //     title: 'Text Guardian',
+        //     body: 'The results are ready.',
+        //     fin: flutterLocalNotificationsPlugin,
+        //   );
+        // });
       },
     );
   }
