@@ -1,117 +1,82 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:text_guardian/components/navbar.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('S E T T I N G S')),
       drawer: Navbar(),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text('Message Filtering'),
-                    subtitle: Text('Used for text filtering'),
-                  ),
-                  ListTile(
-                    title: Text('Sender Filtering Options',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Keyword or Phrase Filtering Options:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Link or Attachment Filtering Options:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 16),
+            _buildSettingsCard(
+              title: 'Message Reporting',
+              subtitle: 'Used for reporting messages',
+              options: [
+                'Reporting Features:',
+                'Reporting Categories:',
+                'Anonymity Options:',
+              ],
             ),
-            SizedBox(height: 15),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text('Two-Factor Authentication'),
-                    subtitle: Text('Used for two-factor authentication'),
-                  ),
-                  ListTile(
-                    title: Text('Verification Methods',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Device Recognition:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Backup Authentication Methods:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text('Message Reporting'),
-                    subtitle: Text('Used for reporting messages'),
-                  ),
-                  ListTile(
-                    title: Text('Reporting Features:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Reporting Categories:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Anonymity Options:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 15),
-            Card(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListTile(
-                    title: Text('Message Blocking'),
-                    subtitle: Text('Used for blocking'),
-                  ),
-                  ListTile(
-                    title: Text('Blocking Options',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Reporting to Authorities:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                  ListTile(
-                    title: Text('Automatic Blocking:',
-                        style: TextStyle(fontSize: 14)),
-                  ),
-                ],
-              ),
+            const SizedBox(height: 16),
+            _buildSettingsCard(
+              title: 'Message Blocking',
+              subtitle: 'Used for blocking',
+              options: [
+                'Blocking Options',
+                'Reporting to Authorities:',
+                'Automatic Blocking:',
+              ],
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSettingsCard(
+      {required String title,
+      required String subtitle,
+      required List<String> options}) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            title: Text(title,
+                style: const TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text(subtitle),
+          ),
+          ...options.map((option) => Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(option, style: const TextStyle(fontSize: 14)),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Handle button press
+                        // ScaffoldMessenger.of().showSnackBar(
+                        //   SnackBar(
+                        //       content: Text('Button pressed for: $option')),
+                        // );
+                      },
+                      child: const Text('Manage'),
+                    ),
+                  ],
+                ),
+              )),
+        ],
       ),
     );
   }
