@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:text_guardian/components/local_notifications.dart';
 import 'package:text_guardian/pages/homepage.dart';
 import 'package:text_guardian/pages/login.dart';
 import 'package:text_guardian/pages/settings.dart';
 import 'package:text_guardian/pages/loading.dart';
-import 'package:text_guardian/pages/results.dart';
+// import 'package:text_guardian/pages/results.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalNotifications.init();
   runApp(const MyApp());
 }
 

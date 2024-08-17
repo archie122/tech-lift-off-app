@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:text_guardian/pages/results.dart';
 import 'package:flutter/material.dart';
 
 class Loading extends StatefulWidget {
