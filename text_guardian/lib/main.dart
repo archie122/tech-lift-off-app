@@ -1,11 +1,29 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:text_guardian/pages/homepage.dart';
 import 'package:text_guardian/pages/login.dart';
 import 'package:text_guardian/pages/settings.dart';
 import 'package:text_guardian/pages/loading.dart';
-import 'package:text_guardian/pages/results.dart';
+// import 'package:text_guardian/pages/results.dart';
 
-void main() {
+void main() async {
+  await AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelGroupKey: 'basic_channel_group',
+      channelKey: 'basic_channel',
+      channelName: 'Basic notifications',
+      channelDescription: 'Notification channel for basic tests',
+      defaultColor: const Color(0xFF9D50DD),
+    ),
+  ], channelGroups: [
+    NotificationChannelGroup(
+        channelGroupKey: 'basic_channel_group',
+        channelGroupName: 'basic group'),
+  ]);
+  bool isAllowed = await AwesomeNotifications().isNotificationAllowed();
+  if (!isAllowed) {
+    AwesomeNotifications().requestPermissionToSendNotifications();
+  }
   runApp(const MyApp());
 }
 
