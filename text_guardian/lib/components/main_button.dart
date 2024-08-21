@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:text_guardian/components/notification.dart';
 import 'dart:async';
@@ -35,6 +36,14 @@ class Button extends StatelessWidget {
       onPressed: () {
         onPressed();
 
+        AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: 1,
+            channelKey: 'basic_channel',
+            title: 'Text Guardian',
+            body: 'The results are ready.',
+          ),
+        );
         // Navigator.pushNamed(context, '/loading');
 
         // Timer(const Duration(seconds: 5), () {
