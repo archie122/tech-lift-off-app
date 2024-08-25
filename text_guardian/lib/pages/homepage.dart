@@ -28,23 +28,15 @@ class _HomePageState extends State<HomePage> {
     final name = _nameController.text.trim();
     final message = _messageController.text.trim();
 
-    // Check if either field is empty
     if (name.isEmpty || message.isEmpty) {
-      // Show an alert dialog
       showDialog(
         context: context,
         builder: (context) => AlertBox(),
       );
-
       return;
     }
 
     final isSuspicious = ScamLinkDetector.isSuspicious(message, name);
-
-    // Debug prints
-    print('Is Suspicious: $isSuspicious');
-    print('Message: $message');
-    print('Name: $name');
 
     Navigator.push(
       context,
@@ -58,34 +50,69 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('H O M E P A G E', style: TextStyle(letterSpacing: 1.5)),
+        title: const Text(
+          'Text Guardian',
+          style: TextStyle(
+            letterSpacing: 1.5,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.green,
+        elevation: 0,
       ),
       drawer: Navbar(),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 40),
-            const Text(
-              'Welcome Back! Here’s how many texts were scanned today:',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 7, 151, 60),
-              ),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Title
+                const Text(
+                  'Welcome Back!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                // Subtitle
+                const Text(
+                  'Here’s how many texts were scanned today:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 30),
+
+                // Textbox
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Textbox(
+                    nameController: _nameController,
+                    messageController: _messageController,
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                // Analyze Button
+                Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Button(onPressed: _analyzeText),
+                ),
+                const SizedBox(height: 40),
+              ],
             ),
-            const SizedBox(height: 20),
-            Textbox(
-              nameController: _nameController,
-              messageController: _messageController,
-            ),
-            const SizedBox(height: 20),
-            Button(onPressed: _analyzeText),
-            const SizedBox(height: 20),
-          ],
+          ),
         ),
       ),
     );
