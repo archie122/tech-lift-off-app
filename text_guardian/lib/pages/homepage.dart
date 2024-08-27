@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
 
                 // Subtitle
                 const Text(
-                  'Here’s how many texts were scanned today:',
+                  'Please enter the name and message you want to analyze:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
