@@ -35,14 +35,14 @@ class Button extends StatelessWidget {
       child: const Text('View Details'),
       onPressed: () {
         onPressed();
-        AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: 1,
-            channelKey: 'basic_channel',
-            title: 'Text Guardian',
-            body: 'The results are ready.',
-          ),
-        );
+        // AwesomeNotifications().createNotification(
+        //   content: NotificationContent(
+        //     id: 1,
+        //     channelKey: 'basic_channel',
+        //     title: 'Text Guardian',
+        //     body: 'The results are ready.',
+        //   ),
+        // );
 
         // Navigator.pushNamed(context, '/loading');
 
