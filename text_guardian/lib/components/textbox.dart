@@ -17,7 +17,7 @@ class _TextboxState extends State<Textbox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 205,
       child: Column(
         children: [
           TextField(
@@ -40,7 +40,8 @@ class _TextboxState extends State<Textbox> {
           const SizedBox(height: 20),
           TextField(
             controller: widget.messageController,
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.multiline,
+            maxLines: 4,
             decoration: InputDecoration(
               hintText: 'Enter the message',
               hintStyle: const TextStyle(fontSize: 14),

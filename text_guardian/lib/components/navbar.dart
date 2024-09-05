@@ -13,7 +13,7 @@ class Navbar extends StatelessWidget {
             currentAccountPicture: CircleAvatar(
               backgroundImage: AssetImage('assets/images/profile.png'),
             ),
-            decoration: BoxDecoration(color: Color.fromARGB(255, 16, 177, 99)),
+            decoration: BoxDecoration(color: Color.fromARGB(255, 99, 172, 190)),
           ),
           ListTile(
             title: const Text('Home'),

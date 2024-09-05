@@ -15,22 +15,22 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      style: const ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(Colors.green),
-        foregroundColor: MaterialStatePropertyAll(Colors.white),
-        padding: MaterialStatePropertyAll(
-          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all(Color.fromARGB(255, 238, 68, 47)),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+        padding: MaterialStateProperty.all(
+          const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         ),
-        shape: MaterialStatePropertyAll(
-          StadiumBorder(),
+        shape: MaterialStateProperty.all(
+          const StadiumBorder(),
         ),
-        minimumSize: MaterialStatePropertyAll(Size.fromHeight(50)),
+        minimumSize: MaterialStateProperty.all(
+          const Size.fromHeight(50),
+        ),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        elevation: MaterialStatePropertyAll(0),
-        shadowColor: MaterialStatePropertyAll(Colors.transparent),
-        surfaceTintColor: MaterialStatePropertyAll(Colors.transparent),
-        visualDensity: VisualDensity.compact,
-        animationDuration: Duration(milliseconds: 500),
+        elevation: MaterialStateProperty.all(0),
+        animationDuration: const Duration(milliseconds: 500),
       ),
       child: const Text('View Details'),
       onPressed: () {

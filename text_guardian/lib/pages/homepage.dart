@@ -56,10 +56,10 @@ class _HomePageState extends State<HomePage> {
             letterSpacing: 1.5,
             fontWeight: FontWeight.bold,
             fontSize: 24,
-            color: Colors.white,
+            color: Color(0xFFF9F4EC),
           ),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color.fromARGB(255, 99, 172, 190),
         elevation: 0,
       ),
       drawer: Navbar(),
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: Color.fromARGB(255, 238, 68, 47),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                     messageController: _messageController,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 60),
 
                 // Analyze Button
                 Container(
